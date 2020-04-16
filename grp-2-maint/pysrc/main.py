@@ -19,9 +19,9 @@ def main():
 	mdl = Model2(title = "Model 2", args = args)
 
 	# -- Les axes
-	xaxis = Axis(label = "x", inf = 0, sup = 5, nbpts = 15)
-	yaxis = Axis(label = "y", inf = 0, sup = 5, nbpts = 15)
-	taxis = Axis(inf = -5, sup = 5, nbpts = 500)
+	xaxis = Axis(label = "x", inf = 0, sup = 1.5, nbpts = 10)
+	yaxis = Axis(label = "y", inf = 0, sup = 1.5, nbpts = 10)
+	taxis = Axis(inf = -10, sup = 50, nbpts = 1000)
 
 	# -- Couleurs et formes
 	col = Color()
