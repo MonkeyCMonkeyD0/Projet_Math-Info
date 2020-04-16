@@ -1,4 +1,4 @@
-from modls.AutonomSys import AutonomSys
+from mdl.AutonomSys import AutonomSys
 
 class SysLine(AutonomSys):
 	""" La classe SysLine : pour la gestion d'un modèle linéaire en exemple. """

@@ -66,9 +66,9 @@ class PhaseDiag:
 		cndszero = listcnd.list_initial
 		for cnd in cndszero:
 			cnd0 = cnd.coord
-			trj = odeint(func = modl.rhs(), y0 = cnd0, t = tdisc_passe, mxstep = 30, mxhnil = 2)
+			trj = odeint(func = modl.rhs(), y0 = cnd0, t = tdisc_passe, mxhnil = 1) #, mxstep = 5000
 			phases.plot(trj[:,0], trj[:,1], cnd.style)
-			trj = odeint(func = modl.rhs(), y0 = cnd0, t = tdisc_futur, mxstep = 30, mxhnil = 2)
+			trj = odeint(func = modl.rhs(), y0 = cnd0, t = tdisc_futur, mxhnil = 1) #, mxstep = 5000
 			phases.plot(trj[:,0], trj[:,1], cnd.style)
 			del trj
 		
@@ -77,5 +77,5 @@ class PhaseDiag:
 		if exportpng:
 			figname = self.title + ".png"
 			figname = figname.replace(" ", "_")
-			print("File saved as", figname, "in Project/")
+			print("File saved as", figname, "in pysrc/")
 			fig.savefig(fname = figname)
