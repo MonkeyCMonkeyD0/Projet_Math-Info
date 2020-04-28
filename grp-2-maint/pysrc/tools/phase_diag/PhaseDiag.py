@@ -70,6 +70,7 @@ class PhaseDiag:
 			phases.plot(trj[:,0], trj[:,1], cnd.style)
 			trj = odeint(func = modl.rhs(), y0 = cnd0, t = tdisc_futur, mxhnil = 1) #, mxstep = 5000
 			phases.plot(trj[:,0], trj[:,1], cnd.style)
+			#phases.plot(tdisc_futur, trj[:,0], cnd.style)
 			del trj
 		
 		plt.show()
