@@ -10,18 +10,18 @@ from mdl.model2 import Model2
 
 def main():
 
-	alpha = 1
-	k = 1
-	l = 1
-	args = {"alpha": alpha, "k": k, "l": l}
+	alpha = 0.5
+	k = 100
+	l = 100
 
 	# -- Le modele
+	args = {"alpha": alpha, "k": k, "l": l}
 	mdl = Model2(title = "Model 2", args = args)
 
 	# -- Les axes
-	xaxis = Axis(label = "x", inf = 0, sup = 1.5, nbpts = 10)
-	yaxis = Axis(label = "y", inf = 0, sup = 1.5, nbpts = 10)
-	taxis = Axis(inf = -10, sup = 50, nbpts = 1000)
+	xaxis = Axis(label = "x", inf = 0, sup = 20, nbpts = 10)
+	yaxis = Axis(label = "y", inf = 0, sup = 20, nbpts = 10)
+	taxis = Axis(inf = -10, sup = 10, nbpts = 100)
 
 	# -- Couleurs et formes
 	col = Color()
@@ -30,13 +30,13 @@ def main():
 	blue_dashdot = LineStyle(color = col.blue(), form = frm.dash_dot())
 
 	# -- Conditions initiales
-	# cnds = Initials(Lx = [2.0], Ly = [1.0, 2.0], style = red_solid)
-	# cnds.append(coord = (1.5, 0.5), style = blue_dashdot)
-	# cnds.append(coord = (2.5, 3), style = blue_dashdot)
+	cnds = Initials(Lx = [0], Ly = [0], style = blue_dashdot)
+	cnds.append(coord = (0, l), style = blue_dashdot)
+	cnds.append(coord = (k, 0), style = blue_dashdot)
 
 	# -- Portrait des phases
 	phases = PhaseDiag(title = mdl.title)
-	phases.portrait(modl = mdl, xaxis = xaxis, yaxis = yaxis, taxis = taxis, exportpng = True)	#listcnd = cnds, 
+	phases.portrait(modl = mdl, listcnd = cnds, xaxis = xaxis, yaxis = yaxis, taxis = taxis, exportpng = True)	
 
 if __name__ == '__main__':
 	main()
