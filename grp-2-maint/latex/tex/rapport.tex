@@ -23,8 +23,6 @@
 \usepackage{array}
 
 
-
-
 \begin{document}
 
 %%%%%%%%%%%%%%%%%
@@ -34,14 +32,13 @@
 \begin{titlepage}
     \begin{sffamily}
         \begin{center}
-        
-            \includegraphics[scale=0.2]{../img/Logo_Polytech_Sorbonne}\\[1.5cm]
+            \includegraphics[scale=0.2]{Logo_Polytech_Sorbonne.png}\\[1.5cm]
             \textsc{\Large \bfseries{Projet Mathématiques Informatique}}\\[1.5cm]
             % Titre
             \HRule \\[0.4cm]
             { \huge \bfseries Sujet 2\\[0.4cm]}
             \HRule \\[2cm]
-            \includegraphics[scale=0.4]{../img/su}\\[2cm]
+            \includegraphics[scale=0.4]{su.png}\\[2cm]
              % Auteurs
             \begin{minipage}{0.4\textwidth}
                 \begin{flushleft} \large
@@ -50,7 +47,7 @@
             \end{minipage}
             \begin{minipage}{0.4\textwidth}
                 \begin{flushright} \large
-                    \textsc{Aissam RABHI\\ Nael SENOUN    }
+                    \textsc{Aissam RABHI\\ Naël SENNOUN}
                 \end{flushright}
             \end{minipage}
             \vfill
@@ -65,94 +62,593 @@
 %%%%%%%%%%%%
 % SOMMAIRE %
 %%%%%%%%%%%%
-
 \tableofcontents
 \newpage
 
-\setcounter{secnumdepth}{0}
-\section{Introduction}
-L'objectif du projet est de modéliser ,par le système différentiel ci-dessous, deux espèces en \\compétitions.
+\section*{Introduction}
+L'objectif du projet est de modéliser, par le système différentiel \eqref{eq:S} ci-dessous, deux espèces en \\compétitions.
+
 \begin{equation}
-    (S):
+\tag{S}
+\label{eq:S}
 \left\{
 \begin{array}{ll}
-\frac{dx}{dt} =  x(1 - \frac{x}{k} - \frac{a y}{k}) \\
-\frac{dy}{dt} = y(1- \frac{y}{l} - \frac{x^{2}}{l})
+    \frac{dx}{dt} =  x(1 - \frac{x}{k} - \frac{a y}{k}) \\
+    \frac{dy}{dt} = y(1- \frac{y}{l} - \frac{x^{2}}{l})
 \end{array}
 \right.
-\end{equation}
-où x représente le nombre d’individus de la première espèce, y le nombre d’individus de la
-deuxième espèce, k est le nombre d’individus de la première espèce que peut nourrir le milieu, l
-est le nombre d’individus de la deuxième espèce que peut nourrir le milieu et a est un coefficient.\\Nous allons dans un premier temps réaliser une analyse mathématique du problème. Puis nous le mettrons en oeuvre dans un programme python 
+\end{equation}\\
 
-\setcounter{secnumdepth}{1}
+Ici $x$ représente le nombre d’individus de la première espèce, $y$ le nombre d’individus de la
+deuxième espèce, $k$ est le nombre d’individus de la première espèce que peut nourrir le milieu, $l$ est le nombre d’individus de la deuxième espèce que peut nourrir le milieu et $a$ est un coefficient. Ici, nous reprenons alors l'évolution de ces espèces dans un milieu donné. Le système différentiel \eqref{eq:S} permet de modéliser le problème et de faciliter sa compréhension. Ceci est donc le parfait exemple pour démontrer le rapport entre les mathématiques et l'environnement. En effet, nous nous intéressons à la croissance du nombre d'individus de chaque espèce selon la capacité du milieu à les nourrir.\\
 
+Dans ce projet nous réalisons une étude qualitative de l’évolution du système modélisé. Il s’agit la plupart du temps de déterminer la stabilité de la communauté étudiée, les condition hypothétiques d’existence d’une stabilité, la sensibilité d’une telle conditions vis à vis des paramètres, des conditions initiales, de la complexité du système.\\
+
+Notre étude sera subdivisée en trois grandes parties :\\
+
+- Pour la première partie, nous allons réaliser une approche théorique qui consiste en une analyse mathématique du problème. \\
+
+- La deuxième partie consistera en l'analyse des graphes obtenus (en Python), ce qui permettra de visualiser l'évolution de chacune des espèces en fonction des différents paramètres.\\
+
+- La troisième et dernière partie sera consacrée à l'interprétation des limites du modèle considéré.
+
+
+
+\newpage
+
+\setcounter{secnumdepth}{2}
 \section{Analyse mathématique}
-
 \subsection{Analyse du modèle}
-La variation du nombre d'individu d'une espèce dépend de la capacité du milieu à la nourrir (définie par les coefficients k et l). Pour k et l très grands, le terme $(- \frac{x}{k} - \frac{a y}{k})$ sera négligeable, on se retrouve donc avec l'équation
-\[\frac{dx}{dt} =x\] \[\frac{dy}{dt} = y\] dont les solutions sont des fonctions exponentielles. \\ On en déduit qu'avec une très grande capacité d'approvisionnement, le nombre d'individu de l'espèce croit de façon exponentielle. \\ Pour un k (ou l) quelconque, la variation du nombre d'individu de l'espèce x (ou y) dépend du signe de  $(1 - \frac{x}{k} - \frac{a y}{k})$ (ou $ (1 -\frac{y}{l} - \frac{x^{2}}{l})$)\\ Pour un instant t fixé, la population augmente a t+dt si :
+L’étude que nous allons présenter porte sur la construction et l’analyse de modèles mathématiques pour gérer la croissance ainsi que les interactions entre deux espèces évoluant dans un certain environnement.\\
+La variation du nombre d'individu d'une espèce dépend de la capacité du milieu à la nourrir (définie par les coefficients $k$ et $l$). Pour $k$ et $l$ très grands, le terme $(- \frac{x}{k} - \frac{a y}{k})$ sera négligeable, on se retrouve donc avec l'équation
+\begin{equation*}
+\left\{
+\begin{array}{ll}
+    \frac{dx}{dt} = x \\
+    \frac{dy}{dt} = y
+\end{array}
+\right.
+\end{equation*}
+\\dont les solutions sont des fonctions exponentielles. \\ On en déduit qu'avec une très grande capacité d'approvisionnement, le nombre d'individu de l'espèce croit de façon exponentielle. \\ Pour un $k$ (ou $l$) quelconque, la variation du nombre d'individu de l'espèce $x$ (ou $y$) dépend du signe de \hspace{0.1cm} $(1 - \frac{x}{k} - \frac{a y}{k})$ \hspace{0.1cm} (respectivement $ (1 -\frac{y}{l} - \frac{x^{2}}{l})$).
+\\\\Pour un instant t fixé, la population augmente a $t + dt$ si :
+
+\begin{equation*}
+    k > x(t) + a y(t) \hspace{0.2cm} \text{(ou } l> y(t) + x(t)^{2}) 
+\end{equation*}
+\begin{itemize}
+    \item $k$ et $l$ sont les capacités du milieu à nourrir $x$ et $y$
+    \item $x$ (respectivement $y$) est le nombre d'individu nourris par le milieu $k$ (resp. $l$)
+    \item $a$ est un coefficient (entre 0 et 1) représentant le pourcentage d'individus de $y$ nourris par le milieu $k$.
+    \item le terme $x + a y$ $(\text{ou } y+ x^{2})$ est la consommation dans $k$ (ou $l$)
+    \item lorsque la consommation dépasse la capacité, il n'y a plus assez de provisions et la population de $x$ (ou de $y$) diminue
+\end{itemize}
+On peut interpréter cette inégalité de la manière suivante :\\
+Si l'on se place dans le cas idéal c'est à dire qu'on se place dans le cas où le milieu dispose d'assez de ressources pour couvrir les besoins vitaux des deux espèces considérés. La population va donc croître de façon exponentielle, ce qui outre l'hypothèse des ressources infinies contredit les observations. Or si la densité d'une des deux espèces est trop forte, les individus vont se retrouver en compétition. On parle alors de croissance densité dépendante ou logistique.\\
+
+Celle-ci peut être représentée par :
+\begin{equation}
+\label{eq:g}
+\tag{G}
+    g(P) = (\lambda-kP(t))
+\end{equation}
+où $k$ est appelé coefficient logistique de la population et $g(P)$ est une fonction polynomiale en $P$ appelée taux de croissance.
+On pose : 
+\begin{equation*}
+    K = \frac{\lambda}{k}= \frac{f-m}{k}
+\end{equation*}
+Avec $f$ : taux de fertilité et $m$ : taux de mortalité
+
+La solution de l'équation \eqref{eq:g} s'écrit :
+\begin{equation*}
+    P(t) = \frac{P_{0}K}{P_{0}+(K-P_{0})\exp{-\lambda}t}
+\end{equation*}\\
+
+Et par suite, on a :\\
+- Si $\lambda > 0$, alors on a $P(t) \longrightarrow 0$ quand $t \longrightarrow \infty$\\
+- Si $\lambda \leqslant 0$, alors on a $P(t) \longrightarrow K$ quand $t \longrightarrow \infty$\\
+- Or on a $P(t) = K$ une solution stationnaire car $P(t)$ est décroissante si $K < P_0$ et croissante sinon.\\
+
+En effet, lorsque en absence de compétition entre les deux espèces, la densité de la population atteint la valeur K que l'on appelle capacité d'accueil du milieu.\\
+
+Étudier le comportement de l'écosystème en fonction des différents paramètres, essayer de trouver un équilibre entre deux espèces en compétition dans un même milieu est ce qu'on cherche à déterminer.\\
+On va alors d'abord commencer par l'étude qualitative du système suivant :
+\begin{equation}
+\tag{S}
+\left\{
+\begin{array}{cc}
+   x' =  x(1 - \frac{x}{k} - \frac{a y}{k}) \\\\
+   y' = y(1- \frac{y}{l} - \frac{x^{2}}{l})
+\end{array}
+\right.
+\end{equation}
+
+\newpage
+
+\subsection{Analyse de la stabilité}
+On s'intéresse d'abord au potentiels points d'équilibre du système, les deux populations seront à l'équilibre lorsqu'elles arrêteront de varier i.e x' = 0 et y' = 0. Ce qui veut dire qu'en partant avec des conditions initiales qui vérifie $(x_{0},y_{0}) = (P1, P2)$
+avec P1 = coordonnée en x du point fixe et P2 = coordonnée en y du point fixe, il n'y a aucune variation des populations.
+\subsubsection{Définition des points fixes}
+Le problème donné est un système non linéaire, on cherche les points singuliers du système en résolvant l'équation $f(x,y) = (0,0) $ avec :
+\begin{equation*}
+    f(x,y) = 
+    \begin{pmatrix}
+        \quad x(1 - \frac{x}{k} - \frac{a y}{k})\phantom{\quad}\\\\
+        \quad y(1- \frac{y}{l} - \frac{x^{2}}{l})\phantom{\quad}
+    \end{pmatrix}
+\end{equation*}
+On a un système d'équations du second ordre à résoudre :\\
+\begin{equation}
+\label{eq:f1}
+\tag{S.F}
+\left\{
+    \begin{array}{ll}
+        x(1 - \frac{x}{k} - \frac{a y}{k}) & = 0 \\
+        y(1- \frac{y}{l} - \frac{x^{2}}{l}) & = 0
+    \end{array}
+\right.
+\hspace{0.5cm}
+\Leftrightarrow
+\hspace{0.5cm}
+\left\{
+    \begin{array}{ll}
+        x = 0 \quad \text{ou} & x = k - a y \\
+        y = 0 \quad \text{ou} & y = l - x^2
+    \end{array}
+\right.
+\end{equation}
+
+On peut donc déterminer plusieurs points fixe:\\\\
+\phantom{}\hfill $(0,0)$ \hfill $(0,l - x^2) = (0,l)$ \hfill $(- a y + k,0) = (k,0)$ \hfill $(k - a y, l - x^{2})$ \hfill \phantom{}\\
+
+On calcule maintenant les coordonnées de ce dernier points en fonction des paramètres.\\
+\begin{equation}
+\label{eq:f2}
+\tag{S.F2}
+\left\{
+    \begin{array}{l}
+        x = k - ay \\
+        y = l - x^{2}
+    \end{array}
+\right.
+\hspace{0.5cm}
+\Leftrightarrow
+\hspace{0.5cm}
+\left\{
+    \begin{array}{l}
+        ax^{2} - x - al + k = 0\\
+        y = l - x^{2}
+    \end{array}
+\right.
+\end{equation}\\
+
+Le système \eqref{eq:f2} admet des solutions dans $\mathbb{R}$, on peut donc en déduire :
+\begin{equation*}
+\begin{array}{cc}
+    x\ =\ \dfrac{1 \pm \sqrt{\Delta}}{2a} \qquad \text{avec} \qquad \Delta\ =\ 1 + 4a(al -k)\ \geqslant\ 0\\\\
+    \implies
+    x\ =\ \dfrac{1 \pm \sqrt{1 + 4a(al - k)}}{2a}
+    \qquad \text{et} \qquad
+    y\ =\ \dfrac{k}{a} - \dfrac{1 \pm \sqrt{1 + 4a(al -k)}}{2a^2}
+\end{array}
+\end{equation*}
+
+- Si $\Delta > 0\ \Leftrightarrow\ a > \frac{k + \sqrt{k^2 - l} }{2l}$, alors le système \eqref{eq:f2} admet deux solution qui sont : 
+\begin{equation*}
+    \left(\ \dfrac{1 + \sqrt{1 + 4a(al -k)}}{2a}\ ,\ \dfrac{k}{a} - \dfrac{1 + \sqrt{1 + 4a(al -k)}}{2a^2}\ \right)
+    \text{ et }
+    \left(\ \dfrac{1 - \sqrt{1 + 4a(al -k)}}{2a}\ ,\ \dfrac{k}{a} - \dfrac{1 - \sqrt{1 + 4a(al -k)}}{2a^2}\ \right)
+\end{equation*}
+\qquad Donc les points critiques sont : $\qquad (0,0),\quad (0,l),\quad (k,0),$\\
+$\phantom{} \hfill \left(\frac{1 + \sqrt{1 + 4a(al -k)}}{2a}, \frac{k}{a} - \frac{1 + \sqrt{1 + 4a(al -k)}}{2a^2} \right),
+\quad \left(\frac{1 - \sqrt{1 + 4a(al -k)}}{2a}, \frac{k}{a} - \frac{1 - \sqrt{1 + 4a(al -k)}}{2a^2}\right) \hfill$
+
+\vfill
+- Si $\Delta < 0\ \Leftrightarrow\ a < \frac{k}{2l}$, alors le système \eqref{eq:f2} n'admet pas de solution réelle.\\
+\phantom{\qquad} Donc les points critiques sont : $\qquad (0,0),\quad (0,l),\quad (k,0)$
+
+\vfill
+- Si $\Delta = 0\ \Leftrightarrow\ a = \frac{k + \sqrt{k^2 - l} }{2l}\ \text{et}\ k \geqslant \sqrt{l}$, alors le système \eqref{eq:f2} admet une solution : 
+\begin{equation*}
+    \left(\ \dfrac{l}{k + \sqrt{k^2 - l}},\ l\left(1 - \dfrac{l}{(k + \sqrt{k^2 - l})^2} \right)\ \right)
+\end{equation*}
+\qquad Donc les points critiques sont : $\qquad (0,0),\quad (0,l),\quad (k,0),
+\quad \left(\ \frac{l}{k + \sqrt{k^2 - l}},\ l\left(1 - \frac{l}{(k + \sqrt{k^2 - l})^2} \right)\ \right)$
+
+\newpage
+\subsubsection{Stabilité des points d'équilibre}
+\noindent
+Pour identifier la stabilité de nos points fixes,  on pose $A$ la matrice jacobienne du système.
+\begin{equation*}
+    J_{F}(x,y) = A =
+    \begin{pmatrix}
+        \ 1- \frac{ay}{k} - \frac{2x}{k} & - \frac{ax}{k}\ \\\\
+        \ - \frac{2xy}{l}  & 1 - \frac{x^{2}}{l} - \frac{2y}{l}\ 
+    \end{pmatrix}
+\end{equation*}
+La détermination de la stabilité consiste en l'observation du signe de la partie réelle des valeurs propres de A en ses points singuliers.\\
+
+\vfill
+\noindent
+- Pour (0,0):
+\begin{equation*}
+    A =
+    \begin{pmatrix}
+        \ 1 & 0 \phantom{\ }\\
+        \ 0 & 1 \phantom{\ }
+    \end{pmatrix}
+\end{equation*}\\
+Cette matrice possède une valeur propre double : 1 , le point correspondant est instable.\\
+
+\vfill
+\noindent
+- Pour (0,$l$) :
+\begin{equation*}
+    A = 
+    \begin{pmatrix}
+        \ 1- \frac{al}{k}  & 0 \phantom{\ }\\\\
+        \ 0  & -1 \phantom{\ }
+    \end{pmatrix}
+\end{equation*}\\
+Les valeurs propres sont racines de $(-1 - \lambda)(1- \frac{al}{k} - \lambda)$ : soit $\lambda = -1 \text{ et } \lambda = 1 - \frac{al}{k}$\\\\
+Grâce à ces valeurs propres nous pouvons caractériser la stabilité de notre point fixe, pour cela il nous a fallu dans un des cas déterminer une fonction de Liapounov $L(x,y) = |y - l|$ qui nous a permit de démontrer la stabilité asymptotique de ce point fixe.
+\begin{itemize}
+    \item le point est asymptotiquement stable si $al \geqslant k$
+    \item le point est instable si $al < k$
+\end{itemize}
+
+
+\vfill
+\noindent
+- Pour ($k$,0) :
+\begin{equation*}
+    A =
+    \begin{pmatrix}
+        \ -1 & -a \phantom{\ }\\\\
+        \ 0 & 1 - \frac{k^{2}}{l} \phantom{\ }
+    \end{pmatrix}
+\end{equation*}\\
+Les valeurs propres sont racines de $(\lambda + 1)(\lambda - 1 + \frac{k^2}{l})$ : soit $\lambda = -1 \text{ et } \lambda = 1 - \frac{k^2}{l}$\\\\
+Grâce à ces valeurs propres nous pouvons déterminer la stabilité de notre point fixe, pour cela il nous a fallu dans un des cas déterminer une fonction de Liapounov $L(x,y) = |x - k|$ qui nous a permit de démontrer la stabilité asymptotique de ce point fixe.
+\begin{itemize}
+    \item le point est asymptotiquement stable si $k \geqslant \sqrt{l}$
+    \item le point est non stable si $k < \sqrt{l}$
+\end{itemize}
+
+\newpage
+
+\vfill
+\noindent
+- Pour $\left(\frac{1 + \sqrt{1 + 4a(al -k)}}{2a}, \frac{k}{a} - \frac{1 + \sqrt{1 + 4a(al -k)}}{2a^2} \right)$ :
+\begin{equation*}
+    A = -
+    \begin{pmatrix}
+        \ \frac{1 + \sqrt{1 + 4a(al -k)}}{2ak} & \frac{1 + \sqrt{1 + 4a(al -k)}}{2k} \phantom{\ }\\\\
+         \ \frac{1 + \sqrt{1 + 4a(al -k)}}{a^2 l}(k - \frac{1}{a}) - \frac{2}{a} + \frac{2k}{a^2 l} & \frac{k}{al} - \frac{1 + \sqrt{1 + 4a(al -k)}}{2a^2 l} \phantom{\ }
+    \end{pmatrix}
+\end{equation*}
+
+Les valeurs propres de cette matrice sont racines du polynôme $P(\lambda)$ :
+\begin{equation*}
+\begin{array}{l}
+    \left(\lambda + \frac{1 + \sqrt{1 + 4a(al -k)}}{2ak}\right)
+    \left( \lambda + \frac{k}{al} - \frac{1 + \sqrt{1 + 4a(al -k)}}{2a^2 l} \right)
+    - \frac{1+\sqrt{1 + 4a(al -k)}}{2k} \cdot \left( \frac{1 + \sqrt{1 + 4a(al -k)}}{a^2 l} \cdot \left(k - \frac{1}{a} \right) - \frac{2}{a} + \frac{2k}{a^2 l} \right)
+\end{array}
+\end{equation*}
+
+Soit $ P(\lambda)= \alpha \lambda^{2} - \beta \lambda + \gamma$ avec : 
+
+\begin{equation*}
+\left \{
+\begin{array}{l}
+     \alpha = 1\\\\
+     \beta =  \frac{k}{al} + \frac{1 + \sqrt{1 + 4a(al -k)}}{2a} \cdot \left( \frac{1}{k} - \frac{1}{al} \right) \\\\
+     \gamma = \frac{1 + \sqrt{1 + 4a(al -k)}}{2a^2 l} \cdot \left( \frac{1}{ak} - 3 \right) + \frac{ak - 1}{a^2 l} + \frac{2 + \sqrt{1 + 4a(al -k)}}{ak} - 1\\
+\end{array}
+\right.
+\end{equation*}\\
+
+Ainsi on peut construire la valeur $ \Delta = \beta^2 - 4 \alpha \gamma $, soit :\\ 
+\begin{equation}
+    \tag{ \Delta }
+    \label{pt5:delta}
+    \begin{array}{ll}
+        \Delta = \frac{1 + \sqrt{1 + 4a(al -k)}}{a} \cdot \left( \frac{1}{al} \cdot \left( 4 - \frac{2k-1}{2al} - \frac{a+1}{ak} \right) + \frac{1-8k}{2k^2} \right) + \frac{a^2 l - k (3a+4)}{ak^2} + \frac{k(k-1) + al(1-4k) + 4l}{a^2 l^2} + 4 \\
+    \end{array}
+\end{equation}
+
+
+
+\vfill
+\noindent
+- Dans la cas ou $\Delta > 0$\\
+
+Les valeurs propres de la matrice A pour ce point sont  : 
+\begin{equation*}
+    \left \{
+    \begin{array}{l}
+        \lambda_{1} = \frac{- \beta - \sqrt{\beta^{2} - 4 \alpha \gamma}}{2\alpha}\\\\
+        \lambda_{2} = \frac{- \beta + \sqrt{\beta^{2} - 4 \alpha \gamma}}{2\alpha} 
+    \end{array}
+    \right.
+\end{equation*}
+\begin{equation*}
+    \Leftrightarrow
+    \tiny
+    \left \{
+    \begin{array}{l}
+        \lambda_{1} =  - \frac{k}{2al} + \frac{1 + \sqrt{1 + 4a(al -k)}}{4a} \cdot \left( \frac{1}{al} - \frac{1}{k} \right) - 
+        \frac{1}{2} \sqrt{\frac{1 + \sqrt{1 + 4a(al -k)}}{a} \cdot \left( \frac{1}{al} \cdot \left( 4 - \frac{2k-1}{2al} - \frac{a+1}{ak} \right) + \frac{1-8k}{2k^2} \right) + \frac{a^2 l - k (3a+4)}{ak^2} + \frac{k(k-1) + al(1-4k) + 4l}{a^2 l^2} + 4}
+        \\\\
+        \lambda_{2} = - \frac{k}{2al} + \frac{1 + \sqrt{1 + 4a(al -k)}}{4a} \cdot \left( \frac{1}{al} - \frac{1}{k} \right) +
+        \frac{1}{2} \sqrt{\frac{1 + \sqrt{1 + 4a(al -k)}}{a} \cdot \left( \frac{1}{al} \cdot \left( 4 - \frac{2k-1}{2al} - \frac{a+1}{ak} \right) + \frac{1-8k}{2k^2} \right) + \frac{a^2 l - k (3a+4)}{ak^2} + \frac{k(k-1) + al(1-4k) + 4l}{a^2 l^2} + 4}
+        \\
+    \end{array}
+    \right.
+\end{equation*}
+
+La stabilité du point fixe dépend du signe des parties réelles des valeurs propres.\\
+\begin{equation*}
+\left \{
+    \begin{array}{llll}
+        Re(\lambda_{1}) < 0 &
+        \quad \Leftrightarrow \quad \lambda_{1} < 0 &
+        \quad \Leftrightarrow \quad \beta + \sqrt{\beta^{2} - 4 \alpha \gamma} > 0 &
+        \quad \Leftrightarrow \quad \beta > 0 \\\\
+        Re(\lambda_{2}) < 0 &
+        \quad \Leftrightarrow \quad \lambda_{2} < 0 &
+        \quad \Leftrightarrow \quad \beta > \sqrt{\beta^{2} - 4 \alpha \gamma} &
+        \quad \Leftrightarrow \quad \gamma > 0 \\
+    \end{array}
+\right.
+\end{equation*}
+
+Tant que $\gamma > 0$, le point est asymptotiquement stable.
+Sinon il est instable.
+
+\vfill
+\noindent
+- Dans la cas ou $\Delta \leqslant 0$\\
+
+La partie réelle des valeurs propres de la matrice A pour ce point est : 
+\begin{equation*}
+    \begin{array}{lll}
+        Re(\lambda_{0,1,2}) = - \frac{\beta}{2\alpha} < 0 &
+        \Leftrightarrow &
+        \beta > 0
+    \end{array}
+\end{equation*}
+
+Ce point est donc asymptotiquement stable si $\beta > 0$. Sinon il est non stable.
+
+
+\newpage
+
+\vfill
+\noindent
+- Pour $\left(\frac{1 - \sqrt{1 + 4a(al -k)}}{2a}, \frac{k}{a} - \frac{1 - \sqrt{1 + 4a(al -k)}}{2a^2}\right)$ :
+\begin{equation*}
+    A = -
+    \begin{pmatrix}
+        \ \frac{1 - \sqrt{1 + 4a(al -k)}}{2ak} & \frac{1 - \sqrt{1 + 4a(al -k)}}{2k} \phantom{\ }\\\\
+        \ \frac{1 - \sqrt{1 + 4a(al -k)}}{a^2 l}(k - \frac{1}{a}) - \frac{2}{a} + \frac{2k}{a^2 l} & \frac{k}{al} - \frac{1 - \sqrt{1 + 4a(al -k)}}{2a^2 l} \phantom{\ }
+    \end{pmatrix}
+\end{equation*}
+
+\begin{equation*}
+    det_{\lambda I_2 - A} = 
+    \left|
+    \begin{array}{lr}
+       \ \lambda + \frac{1 - \sqrt{1 + 4a(al -k)}}{2ak} & \frac{1 - \sqrt{1 + 4a(al -k)}}{2k} \phantom{\ }\\\\
+        \ \frac{1 - \sqrt{1 + 4a(al -k)}}{a^2 l}(k - \frac{1}{a}) - \frac{2}{a} + \frac{k}{a^2 l} & \lambda + \frac{k}{al} - \frac{1 - \sqrt{1 + 4a(al -k)}}{2a^2 l} \phantom{\ }
+    \end{array}
+    \right|
+\end{equation*}
+
+Les valeurs propres de cette matrice sont racines du polynôme $P(\lambda)$ :
+\begin{equation*}
+\begin{array}{l}
+    \left(\lambda + \frac{1 - \sqrt{1 + 4a(al -k)}}{2ak}\right)
+    \left( \lambda + \frac{k}{al} - \frac{1 - \sqrt{1 + 4a(al -k)}}{2a^2 l} \right)
+    - \frac{1-\sqrt{1 + 4a(al -k)}}{2k} \cdot \left( \frac{1 - \sqrt{1 + 4a(al -k)}}{a^2 l} \cdot \left(k - \frac{1}{a} \right) - \frac{2}{a} + \frac{2k}{a^2 l} \right)
+\end{array}
+\end{equation*}
+
+Soit $ P(\lambda)= \alpha \lambda^{2} - \beta \lambda + \gamma$ avec : 
+\begin{equation*}
+\left \{
+\begin{array}{l}
+     \alpha = 1\\\\
+     \beta =  \frac{k}{al} + \frac{1 - \sqrt{1 + 4a(al -k)}}{2a} \cdot \left( \frac{1}{k} - \frac{1}{al} \right) \\\\
+     \gamma = \frac{1 - \sqrt{1 + 4a(al -k)}}{2a^2 l} \cdot \left( \frac{1}{ak} - 3 \right) + \frac{ak - 1}{a^2 l} + \frac{2- \sqrt{1 + 4a(al -k)}}{ak} -1 \\
+\end{array}
+\right.
+\end{equation*}\\
+
+Ainsi on peut construire la valeur $ \Delta = \beta^2 - 4 \alpha \gamma $, soit :
+\begin{equation*}
+\tag{ \Delta }
+\label{pt4:delta}
+    \begin{array}{l}
+        \Delta = \frac{1 - \sqrt{1 + 4a(al -k)}}{a} \cdot \left( \frac{1}{al} \cdot \left( 4 - \frac{2k-1}{2al} - \frac{a+1}{ak} \right) + \frac{1-8k}{2k^2} \right) + \frac{a^2 l - k (3a+4)}{ak^2} + \frac{k(k-1) + al(1-4k) + 4l}{a^2 l^2} + 4 \\
+    \end{array}
+\end{equation*}
+
+
+\noindent
+- Dans le cas où $\Delta > 0$\\\\ Les valeurs propres sont : 
+\begin{equation*}
+\left \{
+    \begin{array}{l}
+        \lambda_{1} = \frac{- \beta - \sqrt{\beta^{2} - 4 \alpha \gamma}}{2\alpha}\\\\
+        \lambda_{2} = \frac{- \beta + \sqrt{\beta^{2} - 4 \alpha \gamma}}{2\alpha}
+    \end{array}
+\right.
+\end{equation*}
+
+\begin{equation*}
+\Rightarrow 
+\tiny
+\left \{
+    \begin{array}{l}
+        \lambda_{1} =   \frac{-k}{2al} - \frac{1 - \sqrt{1 + 4a(al -k)}}{4a} \cdot \left( \frac{1}{k} - \frac{1}{al} \right) -  \frac{1}{2} \sqrt{ \left(  \frac{k}{al} + \frac{1 - \sqrt{1 + 4a(al -k)}}{2a} \cdot \left( \frac{1}{k} - \frac{1}{al} \right) \right)  ^{2} - \left(    \frac{4 - 4\sqrt{1 + 4a(al -k)}}{2a^2 l} \cdot \left( \frac{1}{ak} - 3 \right) + \frac{4(ak - 1)}{a^2 l} + \frac{8 - 4\sqrt{1 + 4a(al -k)}}{ak} - 4    \right)    }\\\\
+        
+        \lambda_{2} =  \frac{-k}{2al} - \frac{1 - \sqrt{1 + 4a(al -k)}}{4a} \cdot \left( \frac{1}{k} - \frac{1}{al} \right) + \frac{1}{2} \sqrt{ \left(  \frac{k}{al} + \frac{1 - \sqrt{1 + 4a(al -k)}}{2a} \cdot \left( \frac{1}{k} - \frac{1}{al} \right) \right)  ^{2} + \left(    \frac{4 - 4\sqrt{1 + 4a(al -k)}}{2a^2 l} \cdot \left( \frac{1}{ak} - 3 \right) + \frac{4(ak - 1)}{a^2 l} + \frac{8 - 4\sqrt{1 + 4a(al -k)}}{ak} - 4    \right)    } \\
+    \end{array}
+\right.
+\end{equation*} 
+La stabilité du point critique étudié dépend du signe de la partie réelle des valeurs propres. $\lambda_1$ étant négatif, on cherche à déterminer le signe de $\lambda_2$.
+
+\begin{equation*}
+    \begin{array}{cc}
+        \frac{- \beta + \sqrt{\beta^{2} - 4 \alpha \gamma}}{2\alpha} < 0 
+        \iff \sqrt{\beta^{2} - 4 \gamma } < \beta \\\\ \iff
+        \beta^{2} - 4 \gamma < \beta^{2}  \iff
+        -4 \gamma < 0 \\\\ \iff
+        \gamma > 0 
+    \end{array}
+\end{equation*}
+Le point est  asymptotiquement stable  si on choisit des paramètres $a,k$ et $l$ tel que $\gamma$ soit positif, on vérifiera la valeur de ce dernier avant la mise en oeuvre.
+\newpage
+\noindent
+- Pour $\left(\ \frac{l}{k + \sqrt{k^2 - l}},\ l\left(1 - \frac{l}{(k + \sqrt{k^2 - l})^2} \right)\ \right)$ :
+\begin{equation*}
+    A = -
+    \begin{pmatrix}
+        \ \frac{l}{k^2 + k\sqrt{k^2 - l}} & \frac{al}{k^2 + k\sqrt{k^2 - l}} \phantom{\ }\\\\
+        \ \frac{2l}{k + \sqrt{k^2 - l}} \cdot (1 - \frac{l}{(k + \sqrt{k^2 - l})^2}) & 1 - \frac{l}{(k + \sqrt{k^2 - l})^2} \phantom{\ }
+    \end{pmatrix}
+\end{equation*}
+Calcul des racines du polynôme caractéristique, et en remplaçant $a$ par sa valeur : 
+\begin{equation*}
+    P(\lambda) = det_{A} = 
+    \left|
+    \begin{array}{lr}
+        -\frac{l}{k^2 + k\sqrt{k^2 - l}} - \lambda & -\frac{1}{2k}  \\ \\
+        -\frac{2l}{k + \sqrt{k^2 - l}} \cdot (1 - \frac{l}{(k + \sqrt{k^2 - l})^2}) & \frac{l}{k + \sqrt{k^2 - l}}- 1 -\lambda 
+    \end{array}
+    \right|
+\end{equation*} \\
+On cherche donc les racines de $P(\lambda)$
+\begin{equation}
+\tag{P}
+    P(\lambda)  = (\dfrac{l}{k^2+k\sqrt{k^2-l}}+\lambda)(1+\lambda-\frac{l}{k+\sqrt{k^2-l}})-\dfrac{l}{k^2+k\sqrt{k^2-l}}(1-\frac{l}{(k+\sqrt{k^2-l)^2}})
+\end{equation}
+
+\begin{equation*}
+    = \alpha \lambda^{2} + \beta \lambda + \gamma \text{\quad avec : \qquad}
+    \left \{
+    \begin{array}{l}
+        \alpha =  1\\\\ 
+        \beta =   \frac{k^{2} + l(1-k) + k \sqrt{k^{2} - l}}{k(k + \sqrt{k^{2} })}\\\\
+        \gamma =  \frac{l (lk(k+\sqrt{k^{2}-l}))}{k^{2}( k + \sqrt{k^{2} - l})^{3} }\\ 
+    \end{array}
+\right.
+\end{equation*}
+
 
 \begin{equation}
-k > x(t) + ay(t) \text{    (ou } l> y(t) + x(t)^{2}) 
+    \tag{ \Delta }
+    \begin{array}{l}
+       \Delta = \frac{1 + \sqrt{1 + 4a(al -k)}}{a} \cdot \left( \frac{1}{al} \cdot \left( 4 - \frac{2k-1}{2al} - \frac{a+1}{ak} \right) + \frac{1-8k}{2k^2} \right) + \frac{a^2 l - k (3a+4)}{ak^2} + \frac{k(k-1) + al(1-4k) + 4l}{a^2 l^2} + 4 \\
+    \end{array}
+    \label{pt6:delta}
 \end{equation}
-On peut interpréter cette inégalité de la manière suivante :
-\begin{itemize}
-    \item k et l sont les capacités du milieu à nourrir x et y
-    \item x (respectivement y)est le nombre d'individu nourris par le milieu k (resp. l)
-    \item a est un coefficient (entre 0 et 1) représentant le pourcentage d'individus de y nourris par le milieu k.
-    \item le terme $x + ay$ $(\text{ou } y+ x^{2})$ est la consommation dans k (ou l)
-    \item lorsque la consommation dépasse la capacité, il n'y a plus assez de provisions et la population de x (ou de y) diminue
-\end{itemize}
-Nous allons dans ce projet étudier le comportement du modèle en fonction de différents paramètres, essayer de trouver un équilibre entre deux espèces en compétitions dans un même milieu.
-\subsection{Analyse de la stabilité}
-Le problème donné est un système non linéaire, on cherche les points singuliers du système en résolvant l'équation $f(x,y) = (0,0) $ avec :
-$$
-f(x,y) = 
-\begin{pmatrix}
-x(1 - \frac{x}{k} - \frac{\alpha y}{k}) \\
- y(1- \frac{y}{l} - \frac{x^{2}}{l})
-\end{pmatrix}
-$$
-On a deux équations du second ordre à résoudre : \\ \\
-Les solutions de l'équation \[x - \frac{x^{2}}{k} - \frac{ayx}{k} = 0\] sont  $x = 0, x= k- ay$\\
-Pour x=0, on a deux solutions de \[y(1- \frac{y}{l}) = 0\] $y= 0$ et $y = l $  \\
-Pour y=0, on a deux solutions de \[x - \frac{x^{2}}{k} = 0\]
-$x=0$  et  $x=k$
-Les points critiques du système sont $(0,0), (k,0), (0,l)$ et $(k-ay,l-x^{2})$ On calcule maintenant les coordonnées de ce dernier points en fonction des paramètres.
 
 
-$$
+On détermine alors la valeurs propres de la matrice en fonction du signe de $\Delta = \beta^{2} - 4\alpha \gamma$ \\ les valeurs propres de la matrice A pour ce point sont : \\\\
+\noindent
+- Dans le cas $\Delta > 0$
+
+\begin{equation*}
+    \left \{
+    \begin{array}{l}
+        \lambda_{1} = \frac{- \beta - \sqrt{\beta^{2} - 4 \alpha \gamma}}{2\alpha}\\\\
+        \lambda_{2} = \frac{- \beta + \sqrt{\beta^{2} - 4 \alpha \gamma}}{2\alpha} 
+    \end{array}
+    \right.
+    \Rightarrow\ 
+    \left \{
+    \begin{array}{l}
+        \lambda_{1} = -\frac{1}{2} \left(   \frac{k^{2} + l(1-k) + k \sqrt{k^{2} - l}}{k(k + \sqrt{k^{2} })}  + \sqrt{ ( \frac{k^{2} + l(1-k) + k \sqrt{k^{2} - l}}{k(k + \sqrt{k^{2} })} )^{2} -   \frac{4l (lk(k+\sqrt{k^{2}-l})}{k^{2}( k + \sqrt{k^{2} - l})^{3} }    } \right) \\\\
+        \lambda_{2} = -\frac{1}{2} \left(   \frac{k^{2} + l(1-k) + k \sqrt{k^{2} - l}}{k(k + \sqrt{k^{2} })}  - \sqrt{ ( \frac{k^{2} + l(1-k) + k \sqrt{k^{2} - l}}{k(k + \sqrt{k^{2} })} )^{2} -   \frac{4l (lk(k+\sqrt{k^{2}-l})}{k^{2}( k + \sqrt{k^{2} - l})^{3} }    } \right)
+    \end{array}
+    \right.
+\end{equation*}
+La stabilité de ce point singulier dépend du signe de $\lambda_{1}$ et $\lambda_{2}$. On voit que $\lambda_{1} <0$, on détermine le signe de $\lambda_{2}$
+
+\begin{equation*}
+    \begin{array}{ll}
+        \frac{- \beta + \sqrt{\beta^{2} - 4 \alpha \gamma}}{2\alpha} < 0 \\ \\
+        \iff \sqrt{\beta^{2} - 4 \gamma } < \beta \\ \\ \iff
+        \beta^{2} - 4 \gamma < \beta^{2} \\\\ \iff
+        -4 \gamma < 0 \\\\ \iff
+        \gamma > 0 
+    \end{array}
+\end{equation*}
+Or, $\gamma$ est strictement positif, on en déduis que la valeur propre $\lambda_{2}$ est strictement négative. Donc le point critique est asymptotiquement stable.
+\newpage
+\noindent
+- Dans le cas $\Delta \leqslant 0$ : \\ \\ 
+On ne regarde que la partie réelle des valeurs propres de $A$.
+
+\begin{equation*}
+    Re (\lambda_{1}) = Re(\lambda_{2}) = - \frac{\beta}{2\alpha} 
+\end{equation*}
+On a là une valeur propre double dont le signe dépend uniquement de $\beta =  \frac{k^{2} + l(1-k) + k \sqrt{k^{2} - l}}{k(k + \sqrt{k^{2} })}$ \\ \\
+On voit que $\beta > 0$ donc les parties réelles des valeurs propres sont strictement négatives. Le point critique est asymptotiquement stable, et ce quelque soit le signe de $\Delta $ (donc $ \forall  (k,l)\in \mathbb{R}^{+}_{*})$\\\\
+
+\subsubsection{Bilan des points critiques: }
+\noindent
+-$(0,0)$ : Point instable, quelque soient les valeurs des paramètres. \\\\
+-$(0,l)$ : Point asymptotiquement stable pour $ a \geqslant \frac{k}{l} $, instable sinon.\\\\
+-$(k,0)$ : Point asymptotiquement stable pour $ k \geqslant \sqrt{l} $, instable sinon. \\\\
+-$\left(\frac{1 + \sqrt{1 + 4a(al -k)}}{2a}, \frac{k}{a} - \frac{1 + \sqrt{1 + 4a(al -k)}}{2a^2} \right)$ : 
+\begin{tabular}{l}
+    Point asymptotiquement stable pour $\beta > 0$ avec \\
+    en plus $\gamma > 0$ si $\Delta > 0$, instable sinon.
+\end{tabular}\\
+-$\left(\frac{1  - \sqrt{1 - 4a(al -k)}}{2a}, \frac{k}{a} - \frac{1 - \sqrt{1 + 4a(al -k)}}{2a^2} \right)$ :
+\begin{tabular}{l}
+    Point asymptotiquement stable pour $\beta > 0$ avec \\ en plus $\gamma > 0$ si $\Delta >0$ instable sinon.
+\end{tabular}\\
+-$\left(\ \frac{l}{k + \sqrt{k^2 - l}},\ l\left(1 - \frac{l}{(k + \sqrt{k^2 - l})^2} \right)\ \right)$ : Point asymptotiquement stable pour tout $(k,l) \in \mathbb{R}_+^*$\\\\
+\newpage
+\subsection*{Interprétation}
+
+Nous avons analysé la stabilité d'un système modélisant deux espèces en compétition. On remarque qu'il est très rare que ce genre de système se retrouve en équilibre. Il existe quelques point stables,\\respectant plusieurs conditions, pour les quels les deux espèces cohabitent. Pour des conditions initiales aléatoires, l'une des deux espèces prend le dessus, faisant disparaître l'autre. L'identification de l'espèce dominante dans le milieu dépend de ses ressources (k,l) mais surtout du paramètre a. Nous allons illustrer cette analyse et les différentes issues possible par des graphes. Concernant le modèle, on remarque que l'une des deux espèces est nettement avantagée: 
+
+\begin{equation*}
 \left\{
 \begin{array}{ll}
-x = k- ay \\
-y = l - x^{2}
+    \frac{dx}{dt} =  x(1 - \frac{x}{k} - \frac{a y}{k}) \\
+    \frac{dy}{dt} = y(1- \frac{y}{l} - \frac{x^{2}}{l})
 \end{array}
 \right.
-$$
+\end{equation*}\\
 
-$$
- \text{<=>}
+On remarque que la population x est avantagée car elle contribue grandement à la diminution de ressources dans le milieu l (par le terme $\frac{-x^2}{l}$. Cela influe directement sur le comportement du modèle, dans lequel la population de l'espèce x subsistera dans la plupart des cas. Rendant difficile la probabilité de trouver un point d'équilibre. \\ \\
+On propose un modèle "plus équilibré" en ajoutant un paramètre $b$ définissant la part d'individus de l'espèce x, se nourrissant du milieu $l$.
+
+\begin{equation*}
 \left\{
 \begin{array}{ll}
--ax^{2}  +x + (al -k) =0\\
-y + x^{2} = l
+    \frac{dx}{dt} =  x(1 - \frac{x}{k} - \frac{a y}{k}) \\
+    \frac{dy}{dt} = y(1- \frac{y}{l} - \frac{b x}{l})
 \end{array}
 \right.
-$$
-Les solutions de la première équation sont :  
-$$
-x_{1} = \frac{-1 + \sqrt{\Delta}}{2a}  \text{ et } x_{1} = \frac{-1 - \sqrt{\Delta}}{2a}
-\text{  avec  }  \Delta = 1 + 4(al -k)\\
-$$
-Les 2 derniers points critiques du système sont
-$$
-(k-al -  \frac{1 - \sqrt{ 1 + 4(al -k)}}{2a},l +  (\frac{1 - \sqrt{ 1 + 4(al -k)}}{2a})^{2}) \text{ et } (k-al +  \frac{1 - \sqrt{ 1 + 4(al -k)}}{2a},l +  (\frac{1 + \sqrt{ 1 + 4(al -k)}}{2a})^{2})
-$$ 
-\\définis seulement pour $\Delta > 0$ soit : $a > \frac{1}{l}(k - \frac{1}{4})$
+\end{equation*}\\
+\noindent
+Avec ce modèle, on aurait plus de chance d'avoir coexistence entre les deux espèces.
+\newpage
 \section{Mise en oeuvre}
-On teste les points critiques comme conditions initiales : \\
-\includegraphics[scale = 0.4]{../../pysrc/img/Model_2} \\
-On remarque qu'aucune courbe n'est tracée que pour la conditions (1,1) qui n'est pas un point critique.
+
+Nous allons maintenant illustrer les hypothèses que nous avons faites dans l'analyse du modèle. Plusieurs situations différentes peuvent être modélisées. \\ \\
+\textbf{Premier cas}\\
+\includegraphics[width = 13cm]{../img/x_predom2.png}\\
+On a choisi différentes condition initiales pour montrer que le comportement asymptotique du modèle n'en dépend pas. On remarque que même pour une valeur de k moitié moins importante que l, c'est bien l'espèce x qui prend le dessus. A noter que le nombre d'individu de l'espèce x se limite à 250, cela correspond à la valeur de k.\\ \\
+\textbf{Second cas}\\
+\includegraphics[width = 13cm]{../img/y_predom2.png}\\
+Comme pour le premier cas, on a choisi différentes conditions initiales. Pour que l'espèce y puisse prendre le dessus, il a fallu prendre une valeur de k nettement inférieure. Nous avons illustré les 2 comportement asymptotique possibles, convergeant vers les points (k,0) et (0,l)
 \end{document}
 
