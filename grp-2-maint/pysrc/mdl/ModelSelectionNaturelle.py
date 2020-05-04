@@ -1,6 +1,6 @@
 from mdl.AutonomSys import AutonomSys
 
-class Model2(AutonomSys):
+class ModelSelectionNaturelle(AutonomSys):
 	""" La classe SysNLine : pour la gestion d'un modèle non linéaire en exemple. """
 
 	@staticmethod
