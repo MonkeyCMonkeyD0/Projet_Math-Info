@@ -10,19 +10,19 @@ from mdl.model2 import Model2
 
 def main():
 
-	k = 1
-	l = 0.8
-	alpha = k + np.sqrt((k-l)/l)
-	args = {"alpha": alpha, "k": k, "l": l}
+	k = 100
+	l = 1000
+	# a = (k+np.sqrt(k*k-l))/(2*l) + 0.1
+	a = k/l
 
 	# -- Le modele
-	args = {"alpha": alpha, "k": k, "l": l}
+	args = {"alpha": a, "k": k, "l": l}
 	mdl = Model2(title = "Model 2", args = args)
 
 	# -- Les axes
-	xaxis = Axis(label = "x", inf = 0, sup = 10, nbpts = 20)
-	yaxis = Axis(label = "y", inf = 0, sup = 10, nbpts = 20)
-	taxis = Axis(inf = -10, sup = 50, nbpts = 1000)
+	xaxis = Axis(label = "x", inf = -100, sup = 1000, nbpts = 50)
+	yaxis = Axis(label = "y", inf = -100, sup = 1000, nbpts = 50)
+	taxis = Axis(inf = -100000, sup = 100000, nbpts = 10000000)
 
 	# -- Couleurs et formes
 	col = Color()
@@ -32,9 +32,25 @@ def main():
 	black_dash = LineStyle(color = col.black(), form = frm.dashed())
 	
 	# -- Conditions initiales
-	cnds = Initials(Lx = [2.0], Ly = [2.0], style = red_solid)
-	cnds.append(coord = (1.5, 0.5), style = blue_dashdot)
-	cnds.append(coord = (3, 1), style = black_dash)
+	cnds = []
+	cnds = Initials(Lx = [0], Ly = [0], style = black_dash)
+	# cnds.append(coord = (0, l), style = blue_dashdot)
+	# cnds.append(coord = (k, 0), style = blue_dashdot)
+
+	x = (1 + np.sqrt(1 + 4*a*(a*l-k)))/(2*a)
+	y = k/a - (1 + np.sqrt(1 + 4*a*(a*l-k)))/(2*a*a)
+	print(x,y)
+	cnds.append(coord = (x, y), style = black_dash)
+
+	x = (1 - np.sqrt(1 + 4*a*(a*l-k)))/(2*a)
+	y = k/a - (1 - np.sqrt(1 + 4*a*(a*l-k)))/(2*a*a)
+	print(x,y)
+	cnds.append(coord = (x, y), style = black_dash)
+
+	# x = l/(k + np.sqrt(k*k - l))
+	# y = l - x*x
+	# print(x,y)
+	# cnds.append(coord = (x, y), style = black_dash)
 
 	# -- Portrait des phases
 	phases = PhaseDiag(title = mdl.title)
