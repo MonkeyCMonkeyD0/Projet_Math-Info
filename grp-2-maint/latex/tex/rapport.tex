@@ -33,13 +33,13 @@
 \begin{titlepage}
     \begin{sffamily}
         \begin{center}
-            \includegraphics[scale=0.2]{Logo_Polytech_Sorbonne.png}\\[1.5cm]
+            \includegraphics[scale=0.2]{../img/Logo_Polytech_Sorbonne.png}\\[1.5cm]
             \textsc{\Large \bfseries{Projet Mathématiques Informatique}}\\[1.5cm]
             % Titre
             \HRule \\[0.4cm]
             { \huge \bfseries Sujet 2\\[0.4cm]}
             \HRule \\[2cm]
-            \includegraphics[scale=0.4]{su.png}\\[2cm]
+            \includegraphics[scale=0.4]{../img/su.png}\\[2cm]
              % Auteurs
             \begin{minipage}{0.4\textwidth}
                 \begin{flushleft} \large
@@ -743,19 +743,19 @@ Après avoir exécuté ce script, le programme affiche son résultat grâce à l
 Nous allons maintenant illustrer les hypothèses que nous avons établies lors de l'analyse du modèle. En effet, en fonction de celles-ci plusieurs situations  peuvent être représentées.
 
 \subsubsection{Premier cas}
-\includegraphics[width = 13cm]{x_predom2.png}\\
+\includegraphics[width = 13cm]{../img/x_predom2.png}\\
 On a choisi trois différentes conditions initiales pour montrer que le comportement asymptotique du modèle ne dépend pas de ces dernières. On remarque que pour une valeur de $k\geqslant \sqrt(l)$, c'est bien l'espèce x qui prend le dessus, le système converge alors vers le point stable correspondant. À noter que le nombre d'individus de l'espèce x se limite à 250, cela correspond à la valeur de k. $(x(t),y(t)) \longrightarrow (k,0) $
 
 \subsubsection{Second cas}
-\includegraphics[width = 13cm]{y_predom2.png}\\
+\includegraphics[width = 13cm]{../img/y_predom2.png}\\
 Comme pour le premier cas, on a choisi différentes conditions initiales. Pour que l'espèce y puisse prendre le dessus, il a fallu prendre une valeur de k nettement inférieure. $(x(t),y(t)) \longrightarrow (0,l) $. Il faut avoir un petit nombre d'individus de x (<25) pour que l'espèce y puisse progresser.
 
 \subsubsection{Troisième cas}
-\includegraphics[width = 13cm]{point_stable3.png}\\
+\includegraphics[width = 13cm]{../img/point_stable3.png}\\
 Dans ce cas, nous avons choisi les valeurs du paramètre a idéale pour que les courbes convergent vers le dernier point critique. On remarque qu'il y a coexistence entre les deux espèces. Cette situation est rendue possible lorsque l'espèce x a suffisamment de ressources pour se maintenir dans le milieu, mais pas assez pour prendre le dessus sur l'espèce y. $(x(t),y(t)) \longrightarrow (k-ay,l-x^2)$
 
 \subsubsection{Quatrième cas}
-\includegraphics[width = 12.5cm]{figure_pf.png}\\
+\includegraphics[width = 12.5cm]{../img/figure_pf.png}\\
 Pour ce cas là, nous avons choisi de mettre comme conditions initiales les points fixes trouvés lors de l'analyse de la stabilité du système: $(0,0)$, $(0,l)$ et $(k,0)$. Comme on peut le constater sur la figure ci-dessus, il n'y pas de courbes car comme nous l'avons bien démontré le système ne varie pas dans ce cas là.
 
 \setcounter{secnumdepth}{1}
@@ -779,7 +779,7 @@ Nous avons analysé la stabilité d'un système modélisant deux espèces en com
 On remarque que la population x est avantagée car elle contribue grandement à la diminution de ressources dans le milieu l (par le terme $\frac{-x^2}{l}$. Cela influe directement sur le comportement du modèle, dans lequel la population de l'espèce x subsistera dans la plupart des cas. Rendant difficile la probabilité de trouver un point d'équilibre. \\\\
 
 \begin{center}
-    \includegraphics[width = 13cm]{Diagramme Phase Model_2.png}
+    \includegraphics[width = 13cm]{../img/Diagramme Phase Model_2.png}
 \end{center}
 Le diagramme de phase montre que la population de y tend à disparaître dans la grande majorité des cas. Ce modèle montre clairement un déséquilibre entre deux populations en compétition dans un milieu adapté à l'une d'entre elle. Ce modèle peut très bien représenter la sélection naturelle. Nous avons une disparition de l'espèce la moins adaptée au milieu, et une occupation massive du milieu par l'autre.
 
@@ -797,7 +797,7 @@ On propose un modèle "plus équilibré" en ajoutant un paramètre $b$ définiss
 \noindent
 Avec ce modèle, on aurait plus de chance d'avoir une coexistence entre les deux espèces. Voici un aperçu du diagramme de phases du modèle proposé. On remarque qu'il y a convergence vers le point d'équilibre (40,40 )dans la plupart des cas\\
 \begin{center}
-    \includegraphics[width = 13cm]{Model_proposé.png}
+    \includegraphics[width = 13cm]{../img/Model_proposé.png}
 \end{center}\\
 Il 
 
@@ -824,7 +824,7 @@ Grâce à notre application, nous avons étudié en détail l'évolution de chac
 \section{Annexes}
  - Diagramme UML de l'application Python utilisée :\\
 \begin{center}
-    \includegraphics[height = 19cm]{UML_test.png}\\
+    \includegraphics[height = 19cm]{../../pysrc/uml/diagramme_UML.png}\\
     \footnote{Les classes de notre application sont en noir alors que celle du système sont en gris.} 
 \end{center}
 
