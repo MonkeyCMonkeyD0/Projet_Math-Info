@@ -1,0 +1,54 @@
+digraph "classes_UML" {
+splines=ortho
+charset="utf-8"
+rankdir=BT
+"0" [label="{AutonomSys|args\ltitle\l|field(x, y)\lrhs()\lsystem(z, t, args)\l}", shape="record"];
+"1" [label="{Axis|inf\llabel\lnbpts\lsup\l|interval()\linterval_futur()\linterval_passe()\l}", shape="record"];
+"2" [label="{Color|\l|black()\lblue()\lcyan()\lgreen()\lmagenta()\lred()\lyellow()\l}", shape="record"];
+"3" [label="{Field|color\l|plot(modl, xaxis, yaxis)\l}", shape="record"];
+"4" [label="{Form|\l|dash_dot()\ldashed()\ldotted()\linvisble()\lsolid()\l}", shape="record"];
+"5" [label="{Initial|coord\lstyle\l|}", shape="record"];
+"6" [label="{Initials|list_initial\llist_initial_at\l|append(new_initial)\lbuild_from_axis(cls, axis)\l}", shape="record"];
+"7" [label="{LineStyle|color\lform\l|line_style()\l}", shape="record"];
+"8" [label="{Model2|\l|system(z, t, args)\l}", shape="record"];
+"9" [label="{PhaseDiag|figsize\ltitle\l|portrait(modl, xaxis, yaxis, taxis, listcnd, exportpng, showfield)\l}", shape="record"];
+"11" [label="{dict|\l|clear()\lcopy()\lget()\litems()\lkeys()\lpop()\lpopitem()\lsetdefault()\lupdate()\lvalues()\l}", shape="record", color="grey80"];
+"13" [label="{int|\l|bit_length()\lconjugate()\lto_bytes()\l}", shape="record", color="grey80"];
+"14" [label="{list|\l|append()\lclear()\lcopy()\lcount()\lextend()\lindex()\linsert()\lpop()\lremove()\lreverse()\lsort()\l}", shape="record", color="grey80"];
+"16" [label="{object}", shape="record", color="grey80"];
+"18" [label="{str|\l|capitalize()\lcasefold()\lcenter(width, fillchar)\lcount(sub, start, end)\ldecode(encoding, errors)\lencode(encoding, errors)\lendswith()\lexpandtabs()\lfind(sub, start, end)\lformat()\lformat_map()\lindex(sub, start, end)\lisalnum()\lisalpha()\lisascii()\lisdecimal()\lisdigit()\lisidentifier()\lislower()\lisnumeric()\lisprintable()\lisspace()\listitle()\lisupper()\ljoin(iterable)\lljust(width, fillchar)\llower()\llstrip(chars)\lpartition()\lreplace(old, new, count)\lrfind()\lrindex()\lrjust(width, fillchar)\lrpartition()\lrsplit()\lrstrip(chars)\lsplit()\lsplitlines()\lstartswith()\lstrip(chars)\lswapcase()\ltitle()\ltranslate()\lupper()\lzfill()\l}", shape="record", color="grey80"];
+"19" [label="{tuple|\l|count()\lindex()\l}", shape="record", color="grey80"];
+"0" -> "16" [arrowhead="empty", arrowtail="none"];
+"1" -> "16" [arrowhead="empty", arrowtail="none"];
+"2" -> "16" [arrowhead="empty", arrowtail="none"];
+"3" -> "16" [arrowhead="empty", arrowtail="none"];
+"4" -> "16" [arrowhead="empty", arrowtail="none"];
+"5" -> "16" [arrowhead="empty", arrowtail="none"];
+"6" -> "16" [arrowhead="empty", arrowtail="none"];
+"7" -> "16" [arrowhead="empty", arrowtail="none"];
+"8" -> "0" [arrowhead="empty", arrowtail="none"];
+"9" -> "16" [arrowhead="empty", arrowtail="none"];
+"11" -> "0" [arrowhead="diamond", arrowtail="none", style="solid"];
+"11" -> "2" [arrowhead="diamond", arrowtail="none", style="solid"];
+"11" -> "4" [arrowhead="diamond", arrowtail="none", style="solid"];
+"13" -> "1" [arrowhead="diamond", arrowtail="none", style="solid"];
+"14" -> "6" [arrowhead="diamond", arrowtail="none", style="solid"];
+"18" -> "1" [arrowhead="diamond", arrowtail="none", style="solid"];
+"18" -> "3" [arrowhead="diamond", arrowtail="none", style="solid"];
+"18" -> "5" [arrowhead="diamond", arrowtail="none", style="solid"];
+"18" -> "7" [arrowhead="diamond", arrowtail="none", style="solid"];
+"18" -> "7" [arrowhead="diamond", arrowtail="none", style="solid"];
+"18" -> "9" [arrowhead="diamond", arrowtail="none", style="solid"];
+"19" -> "9" [arrowhead="diamond", arrowtail="none", style="solid"];
+"19" -> "9" [arrowhead="diamond", arrowtail="none", style="solid"];
+"1" -> "3" [arrowhead="diamond", arrowtail="none", style="solid"];
+"1" -> "9" [arrowhead="diamond", arrowtail="none", style="solid"];
+"1" -> "6" [arrowhead="diamond", arrowtail="none", style="solid"];
+"2" -> "7" [arrowhead="diamond", arrowtail="none", style="solid"];
+"4" -> "7" [arrowhead="diamond", arrowtail="none", style="solid"];
+"7" -> "5" [arrowhead="diamond", arrowtail="none", style="solid"];
+"5" -> "6" [arrowhead="diamond", arrowtail="none", style="solid"];
+"6" -> "9" [arrowhead="diamond", arrowtail="none", style="solid"];
+"8" -> "3" [arrowhead="diamond", arrowtail="none", style="solid"];
+"8" -> "9" [arrowhead="diamond", arrowtail="none", style="solid"];
+}
