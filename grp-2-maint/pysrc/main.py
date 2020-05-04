@@ -10,7 +10,7 @@ from mdl.model2 import Model2
 
 def main():
 
-	k = 250
+	k = 200
 	l = 400
 	# a = (k+np.sqrt(k*k-l))/(2*l) + 0.1
 	a = 0.5
@@ -33,9 +33,9 @@ def main():
 	
 	# -- Conditions initiales
 	cnds = []
-	cnds = Initials(Lx = [10], Ly = [120], style = black_dash)
-	cnds.append(coord = (20, 200), style = blue_dashdot)
-	cnds.append(coord = (150, 200), style = red_solid)
+	cnds = Initials(Lx = [0], Ly = [0], style = black_dash)
+	cnds.append(coord = (0, l), style = blue_dashdot)
+	cnds.append(coord = (k, 0), style = red_solid)
 
 	phases=PhaseDiag(title = mdl.title)
 	phases.portrait(modl = mdl, xaxis = xaxis, yaxis = yaxis, taxis = taxis, listcnd = cnds, exportpng = True) 
