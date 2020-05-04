@@ -11,9 +11,9 @@ from mdl.model2 import Model2
 def main():
 
 	k = 100
-	l = 1000
+	l = 300
 	# a = (k+np.sqrt(k*k-l))/(2*l) + 0.1
-	a = k/l
+	a = 0.5
 
 	# -- Le modele
 	args = {"alpha": a, "k": k, "l": l}
@@ -22,7 +22,7 @@ def main():
 	# -- Les axes
 	xaxis = Axis(label = "x", inf = -100, sup = 1000, nbpts = 50)
 	yaxis = Axis(label = "y", inf = -100, sup = 1000, nbpts = 50)
-	taxis = Axis(inf = -100000, sup = 100000, nbpts = 10000000)
+	taxis = Axis(inf = -10, sup = 10, nbpts = 10000000)
 
 	# -- Couleurs et formes
 	col = Color()
@@ -34,8 +34,8 @@ def main():
 	# -- Conditions initiales
 	cnds = []
 	cnds = Initials(Lx = [0], Ly = [0], style = black_dash)
-	# cnds.append(coord = (0, l), style = blue_dashdot)
-	# cnds.append(coord = (k, 0), style = blue_dashdot)
+	cnds.append(coord = (0, l), style = blue_dashdot)
+	cnds.append(coord = (k, 0), style = blue_dashdot)
 
 	x = (1 + np.sqrt(1 + 4*a*(a*l-k)))/(2*a)
 	y = k/a - (1 + np.sqrt(1 + 4*a*(a*l-k)))/(2*a*a)
