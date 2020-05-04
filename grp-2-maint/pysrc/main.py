@@ -10,8 +10,8 @@ from mdl.model2 import Model2
 
 def main():
 
-	k = 100
-	l = 300
+	k = 250
+	l = 400
 	# a = (k+np.sqrt(k*k-l))/(2*l) + 0.1
 	a = 0.5
 
@@ -20,9 +20,9 @@ def main():
 	mdl = Model2(title = "Model 2", args = args)
 
 	# -- Les axes
-	xaxis = Axis(label = "x", inf = -100, sup = 1000, nbpts = 50)
-	yaxis = Axis(label = "y", inf = -100, sup = 1000, nbpts = 50)
-	taxis = Axis(inf = -10, sup = 10, nbpts = 10000000)
+	xaxis = Axis(label = "x", inf = 0, sup = 300, nbpts = 50)
+	yaxis = Axis(label = "y", inf = 0, sup = 300, nbpts = 50)
+	taxis = Axis(inf = 0, sup = 1000, nbpts = 10000)
 
 	# -- Couleurs et formes
 	col = Color()
@@ -33,10 +33,13 @@ def main():
 	
 	# -- Conditions initiales
 	cnds = []
-	cnds = Initials(Lx = [0], Ly = [0], style = black_dash)
-	cnds.append(coord = (0, l), style = blue_dashdot)
-	cnds.append(coord = (k, 0), style = blue_dashdot)
+	cnds = Initials(Lx = [10], Ly = [120], style = black_dash)
+	cnds.append(coord = (20, 200), style = blue_dashdot)
+	cnds.append(coord = (150, 200), style = red_solid)
 
+	phases=PhaseDiag(title = mdl.title)
+	phases.portrait(modl = mdl, xaxis = xaxis, yaxis = yaxis, taxis = taxis, listcnd = cnds, exportpng = True) 
+"""
 	x = (1 + np.sqrt(1 + 4*a*(a*l-k)))/(2*a)
 	y = k/a - (1 + np.sqrt(1 + 4*a*(a*l-k)))/(2*a*a)
 	print(x,y)
@@ -51,10 +54,8 @@ def main():
 	# y = l - x*x
 	# print(x,y)
 	# cnds.append(coord = (x, y), style = black_dash)
-
+"""
 	# -- Portrait des phases
-	phases = PhaseDiag(title = mdl.title)
-	phases.portrait(modl = mdl, xaxis = xaxis, yaxis = yaxis, taxis = taxis, listcnd = cnds, exportpng = True) 
 
 if __name__ == '__main__':
 	main()
