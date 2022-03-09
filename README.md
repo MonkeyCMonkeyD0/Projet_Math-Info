@@ -7,4 +7,4 @@ Auteurs :
 - EL M’HAMDI Kenza
 - MICHEL Tristan
 
-Rapport disponible sous : `/rapport.pdf` 
+Rapport disponible sous : `/grp-2-maint/latex/rapport.pdf` 
